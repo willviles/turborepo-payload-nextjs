@@ -1,0 +1,35 @@
+{
+  "name": "@foo/cms",
+  "description": "Payload project created from blank template",
+  "version": "1.0.0",
+  "main": "dist/server.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "pnpm with-env cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts nodemon",
+    "build:payload": "pnpm with-env cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload build",
+    "build:server": "pnpm with-env tsc",
+    "build": "pnpm cms:generate-types && pnpm build:payload && pnpm build:server",
+    "clean": "rm -Rf .turbo node_modules dist .tsbuildinfo",
+    "generate-types": "cross-env PAYLOAD_CONFIG_PATH=./src/payload.config.ts payload generate:types",
+    "serve": "pnpm with-env cross-env PAYLOAD_CONFIG_PATH=dist/payload.config.js NODE_ENV=production node dist/server.js",
+    "start": "pnpm serve",
+    "lint": "eslint ./src/**",
+    "lint:fix": "pnpm lint --fix",
+    "type-check": "tsc --noEmit",
+    "with-env": "dotenv -e ../../.env --"
+  },
+  "dependencies": {
+    "payload": "^1.7.4",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.9",
+    "cross-env": "^7.0.3",
+    "dotenv-cli": "^6.0.0",
+    "nodemon": "^2.0.6",
+    "ts-node": "^9.1.1",
+    "copyfiles": "^2.4.1",
+    "typescript": "^4.8.4"
+  }
+}
